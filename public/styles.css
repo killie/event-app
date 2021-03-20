@@ -2,3 +2,16 @@
     display: flex;
     gap: 20px;
 }
+
+.EventsList tbody tr:hover {
+    cursor: pointer;
+    background-color: silver;
+}
+
+.EventWindow {
+    border: 1px solid gray;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

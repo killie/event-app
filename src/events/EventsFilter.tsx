@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { useEffect, ReactElement } from 'react';
 
 interface EventsFilterProps {
     sources: string[],
-    onFilterChange: (fromDate: number, toDate: number, sourceId?: string) => void
+    onFilterChange: (fromDate: number, toDate: number, sourceId?: string) => void,
+    children: React.ReactNode
 }
 
 export default function EventsFilter(props: EventsFilterProps): ReactElement {
@@ -38,6 +39,8 @@ export default function EventsFilter(props: EventsFilterProps): ReactElement {
 	    const toDate = (thisMonth === 11 ? Date.UTC(thisYear + 1, 0, 1) : Date.UTC(thisYear, thisMonth + 1, 1));
 	    props.onFilterChange(fromDate, toDate - 1);
     };
+
+    useEffect(() => onFilter(), []);
     
     return (
 	    <div className="EventsFilter">
@@ -45,6 +48,7 @@ export default function EventsFilter(props: EventsFilterProps): ReactElement {
 	        <div><span>Year:</span><select onChange={onYearChange}>{years()}</select></div>
 	        <div><span>Source:</span><input type="text"></input></div>
 	        <div><button onClick={onFilter}>Filter</button></div>
+            {props.children}
 	    </div>
     );
 }
